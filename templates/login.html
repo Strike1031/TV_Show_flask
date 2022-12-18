@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+{% block content %}
+<style>
+    body {
+        background: coral;
+    }
+
+    .myblock {
+        border: 1px solid black;
+        border-radius: 4%;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 3%;
+        margin: 1%;
+    }
+
+
+    .myblock1 {
+        border: 1px solid black;
+        border-radius: 4%;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 3%;
+        margin: 1%;
+    }
+
+    .h1 {
+        color: coral;
+    }
+
+    .mycontainer {
+        display: flex;
+    }
+    .title {
+        color: purple;
+    }
+
+    .mybtn {
+        background: rgba(0, 0, 0, 0.5);
+    }
+</style>
+<div class="">
+    <h1 class="title">TV Shows!</h1>
+    <!-- <h2> {{ get_flashed_messages() }} </h2> -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for message in messages %}
+            <li style="color: red;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="mycontainer">
+        <div class="col-6 col-lg-6 col-md-6 col-sm-6 myblock">
+            <h1 class="h1">Register</h1>
+            <form action="/signup" method="POST" class="form-group">
+                <div class="form-group">
+                    <input type="text" name="first_name" placeholder="First Name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="last_name" placeholder="Last Name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block btn-dark mybtn">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6 col-lg-6 col-md-6 col-sm-6 myblock1">
+            <h1 class="h1">Login</h1>
+            <form action="/login" method="POST" class="form-group">
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block btn-dark mybtn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

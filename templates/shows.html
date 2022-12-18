@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block content %}
+<style>
+  .name {
+    font-size: 2rem;
+  }
+
+  .actions {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 160px;
+  }
+</style>
+<div class="container">
+    <div class="jumbotron">
+        <span class="name"> {{result['first_name']}}&nbsp;{{result['last_name']}}!</h1>
+        </span>
+        <p class="lead" style="text-align: right;">
+          <a class="btn btn-primary btn-lg" href="/shows/new" role="button">+ Create</a>
+          <a class="btn btn-primary btn-lg" href="/logout" role="button">Logout</a>
+        </p>
+    </div>
+    <h3>All TV Shows:</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Network</th>
+          <th scope="col">Release Date</th>
+          <th scope="col" style="width: 160px;">Actions</th>
+          <th scope="col">Posted by</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tv_show in result["tv_shows"] %}
+        <tr>
+          <th scope="row">{{ tv_show.title }}</th>
+          <td>{{ tv_show.network }}</td>
+          <td>{{ tv_show.release_date }}</td>
+          <td>
+            <div class="actions">
+              <a href="/shows/{{tv_show.id}}">show</a>
+              {% if tv_show.email == result['email'] %}
+                <a href="/shows/edit/{{tv_show.id}}">Edit</a>
+                <form action="/shows/delete/{{tv_show.id}}" method="post">
+                  <button type="submit">Delete</button>
+                </form>
+                <!-- <a href="/shows/delete/{{tv_show.id}}" >Delete</a> -->
+              {% endif %}
+            </div>
+          </td>
+          <td>{{tv_show.first_name}}&nbsp;{{tv_show.last_name}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}
